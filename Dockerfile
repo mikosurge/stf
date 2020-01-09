@@ -25,10 +25,11 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
       stf && \
     sed -i'' 's@http://archive.ubuntu.com/ubuntu/@mirror://mirrors.ubuntu.com/mirrors.txt@' /etc/apt/sources.list && \
     apt-get update && \
+    apt-get install -y openjdk-8-jdk && \
     apt-get -y install wget python build-essential && \
     cd /tmp && \
     wget --progress=dot:mega \
-      https://nodejs.org/dist/v6.11.2/node-v6.11.2-linux-x64.tar.xz && \
+      https://nodejs.org/dist/v8.12.0/node-v8.12.0-linux-x64.tar.xz && \
     tar -xJf node-v*.tar.xz --strip-components 1 -C /usr/local && \
     rm node-v*.tar.xz && \
     su stf-build -s /bin/bash -c '/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js install' && \
@@ -55,11 +56,11 @@ RUN set -x && \
     tar xzf stf-*.tgz --strip-components 1 -C /app && \
     bower cache clean && \
     npm prune --production && \
+    npm cache clean --force && \
     mv node_modules /app && \
-    npm cache clean && \
     rm -rf ~/.node-gyp && \
-    cd /app && \
-    rm -rf /tmp/*
+    cd /app
+    # rm -rf /tmp/*
 
 # Switch to the app user.
 USER stf
