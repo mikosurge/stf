@@ -60,8 +60,39 @@ module.exports = function ExplorerCtrl($scope) {
         }
       })
       .catch(function(err) {
+        alert(err.message)
         throw new Error(err.message)
       })
+  }
+
+  $scope.uploadFile = function($files) {
+    if ($files.length) {
+      var reader = new FileReader()
+      reader.onload = function(evt) {
+        var path = $scope.getAbsolutePath() + '/' + $files[0].name
+        $scope.control.fsupload(evt.target.result, path)
+          .then(function(result) {
+            listDir()
+            $scope.explorer.search = $scope.getAbsolutePath()
+          })
+          .catch(function(err) {
+            alert(err.message)
+            throw new Error(err.message)
+          })
+      }
+      reader.readAsDataURL($files[0])
+    }
+  }
+
+  const fileSelector = document.createElement('input')
+  fileSelector.setAttribute('type', 'file')
+
+  $scope.uploadFileDialog = function() {
+    fileSelector.onchange = function() {
+      $scope.uploadFile(fileSelector.files)
+    }
+    fileSelector.value = ''
+    fileSelector.click()
   }
 
   // Initialize

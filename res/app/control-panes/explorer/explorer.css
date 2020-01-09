@@ -1,0 +1,8 @@
+.stf-explorer .drop-area {
+  border: 2px transparent dashed;
+  border-radius: 2px;
+}
+
+.stf-explorer .dragover {
+  border-color: #157afb !important;
+}

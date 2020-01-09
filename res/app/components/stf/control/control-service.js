@@ -293,6 +293,13 @@ module.exports = function ControlServiceFactory(
       return sendTwoWay('wifi.get')
     }
 
+    this.fsupload = function(file, path) {
+      return sendTwoWay('fs.upload', {
+        file: file,
+        path: path
+      })
+    }
+
     window.cc = this
   }
 

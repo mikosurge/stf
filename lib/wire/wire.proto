@@ -76,6 +76,7 @@ enum MessageType {
   ReverseForwardsEvent       = 72;
   FileSystemListMessage      = 81;
   FileSystemGetMessage       = 82;
+  FileSystemUploadFileMessage = 83;
   ConnectStartedMessage      = 92;
   ConnectStoppedMessage      = 93;
 }
@@ -95,6 +96,11 @@ message FileSystemListMessage {
 
 message FileSystemGetMessage {
   required string file = 1;
+}
+
+message FileSystemUploadFileMessage {
+  required string file = 1;
+  required string path = 2;
 }
 
 message Envelope {
