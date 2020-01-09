@@ -108,6 +108,24 @@ module.exports =
         scope.$on('$destroy', function() {
           parent.removeEventListener('scroll', throttledScrollListener)
         })
+
+        scope.saveLog = function() {
+          var result = ''
+          for (var i = 0; i < LogcatService.entries.length; i++) {
+            result += LogcatService.entries[i].priorityLabel + " "
+            result += LogcatService.entries[i].dateLabel + " "
+            result += LogcatService.entries[i].pid + " "
+            result += LogcatService.entries[i].tid + " "
+            result += LogcatService.entries[i].tag + " "
+            result += LogcatService.entries[i].message + " "
+            result += '\n'
+          }
+
+          var save = document.createElement('a')
+          save.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(result))
+          save.setAttribute('download', 'log.txt')
+          save.click()
+        }
       }
     }
   }

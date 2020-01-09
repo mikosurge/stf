@@ -8,6 +8,10 @@
               i.fa.fa-list-alt
               span(ng-if='started') {{"Stop"|translate}}
               span(ng-if='!started') {{"Get"|translate}}
+          td(width='1%')
+            button(ng-click='saveLog()', title='{{"Save Log"|translate}}').btn.btn-xs.btn-primary-outline
+              i.fa.fa-floppy-o
+              span(translate) Save Log
           td(width='6%')
             select(ng-model='filters.priority', ng-options='l.name for l in filters.levelNumbers')
               option(value='', disabled, selected) {{"Level"|translate}}
