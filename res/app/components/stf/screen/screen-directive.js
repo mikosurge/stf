@@ -296,7 +296,7 @@ module.exports = function DeviceScreenDirective(
                 }
 
                 var blob = new Blob([message.data], {
-                  type: 'image/jpeg'
+                  type: 'image/webp'
                 })
 
                 var img = imagePool.next()
